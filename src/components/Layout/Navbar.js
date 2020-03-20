@@ -1,18 +1,34 @@
 import React from 'react'
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import { connect } from 'react-redux'
+import { Dropdown } from 'semantic-ui-react'
 
 
 function Navbar(props) {
     return (
-        <div className="ui secondary menu">
-            <Link to="/" className="item">Home</Link>
-            <Link to="/movies" className="item">Movies</Link>
-            {props.isAuth && <Link to="/orders" className="item">Orders</Link>}
-            <div className="right menu">
-                {props.isAuth ? <Link to="/logout" className="item">Logout</Link> : <Link to="/auth" className="item">Authenticate</Link>}
+        < div class="ui large menu" >
+            <NavLink exact to="/" className="item">Home</NavLink>
+            <NavLink to="/movies" className="item">Movies</NavLink>
+
+            <div class="right menu">
+               
+                {
+                    props.isAuth && (
+                    <Dropdown item text='Utilities'>
+                        <Dropdown.Menu>
+                            <div> <Link to="/addMovie" className="item">Add Movie</Link> </div>
+                            <div> <Link to="/orders" className="item">Orders</Link> </div>
+                            
+                        </Dropdown.Menu>
+                    </Dropdown>)
+                }
+               
+
+
+                {props.isAuth ? <NavLink to="/logout" className="ui item ">Logout</NavLink> : <NavLink to="/auth" className="item">Authenticate</NavLink>}
+
             </div>
-        </div>
+        </div >
     )
 }
 
@@ -23,3 +39,5 @@ const mapStateTProps = (state) => {
 }
 
 export default connect(mapStateTProps)(Navbar)
+
+

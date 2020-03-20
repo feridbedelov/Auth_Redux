@@ -8,6 +8,8 @@ import Home from './components/HomePage/Home';
 import { checkAuthState } from './store/Auth/actions';
 import { connect } from 'react-redux';
 import Movies from './components/Movies/Movies';
+import MovieDetail from './components/Movies/MovieDetail/MovieDetail';
+import MovieForm from './components/Movies/MovieForm/MovieForm';
 
 
 function App(props) {
@@ -21,6 +23,7 @@ function App(props) {
       <Route exact path="/" component={Home} />
       <Route exact path="/auth" component={Authenticate} />
       <Route exact path="/movies" component={Movies} />
+      <Route exact path="/movie/:id" component={MovieDetail} />
       <Redirect to="/" />
     </ Switch>
   )
@@ -32,6 +35,8 @@ function App(props) {
         <Route exact path="/auth" component={Authenticate} />
         <Route exact path = "/logout" component = {Logout} />
         <Route exact path="/movies" component={Movies} />
+        <Route exact path="/movie/:id" component={MovieDetail} />
+        <Route exact path="/addMovie" component={MovieForm} />
         <Redirect to="/" />
       </ Switch>
     )

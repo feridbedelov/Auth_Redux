@@ -1,0 +1,11 @@
+.details{
+    margin-top: 4rem;
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.details-movie p a{
+    margin-left: 10px;
+}
+

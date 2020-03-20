@@ -1,0 +1,10 @@
+.field span {
+    color: red;
+}
+
+.formMovie{
+    display: grid !important ; 
+    grid-template-columns: 4fr 1fr !important;
+    align-items: center ;
+
+}
