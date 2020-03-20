@@ -1,0 +1,6 @@
+.ui .card:hover {
+    -webkit-box-shadow: 10px 11px 34px -1px rgba(12,79,70,0.83);
+-moz-box-shadow: 10px 11px 34px -1px rgba(12,79,70,0.83);
+box-shadow: 10px 11px 34px -1px rgba(12,79,70,0.83);
+
+}
