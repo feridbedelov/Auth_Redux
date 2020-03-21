@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import Authenticate from './components/Auth/Authenticate';
 import { Route, Switch, withRouter, Redirect } from "react-router-dom"
-import NotFound from './components/Errors/NotFound';
 import Navbar from './components/Layout/Navbar';
 import Logout from './components/Auth/Logout';
 import Home from './components/HomePage/Home';
@@ -23,7 +22,7 @@ function App(props) {
       <Route exact path="/" component={Home} />
       <Route exact path="/auth" component={Authenticate} />
       <Route exact path="/movies" component={Movies} />
-      <Route exact path="/movie/:id" component={MovieDetail} />
+      <Route exact path="/movies/:id" component={MovieDetail} />
       <Redirect to="/" />
     </ Switch>
   )
@@ -35,8 +34,9 @@ function App(props) {
         <Route exact path="/auth" component={Authenticate} />
         <Route exact path = "/logout" component = {Logout} />
         <Route exact path="/movies" component={Movies} />
-        <Route exact path="/movie/:id" component={MovieDetail} />
+        <Route exact path="/movies/:id" component={MovieDetail} />
         <Route exact path="/addMovie" component={MovieForm} />
+        <Route exact path="/editMovie/:id" component={MovieForm} />
         <Redirect to="/" />
       </ Switch>
     )

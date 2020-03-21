@@ -6,11 +6,11 @@ import { Dropdown } from 'semantic-ui-react'
 
 function Navbar(props) {
     return (
-        < div class="ui large menu" >
+        < div className="ui large menu" >
             <NavLink exact to="/" className="item">Home</NavLink>
             <NavLink to="/movies" className="item">Movies</NavLink>
 
-            <div class="right menu">
+            <div className="right menu">
                
                 {
                     props.isAuth && (

@@ -50,9 +50,9 @@ export const auth = (email, password,isSignUp) => {
             password: password,
             returnSecureToken: true
         }
-        let url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAT8jfpOwx55xJMFjniAcsvjCtfyNCX8pk";
+        let url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDRsj7HtorwCladgTQfmvcANiKedMvO-bM";
         if(!isSignUp){
-            url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAT8jfpOwx55xJMFjniAcsvjCtfyNCX8pk"
+            url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDRsj7HtorwCladgTQfmvcANiKedMvO-bM"
         }
         
         Axios.post(url,authData)

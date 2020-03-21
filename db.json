@@ -1,0 +1,94 @@
+{
+  "movies": [
+    {
+      "title": "The Dunkirk ",
+      "director": "Critopher Nolan",
+      "year": 2017,
+      "link": "https://www.imdb.com/title/tt5013056/",
+      "imageLink": "https://source.unsplash.com/random/204x202",
+      "userId": "PzfHYaeCHiSG9CPlR5OATwVcn8g1",
+      "id": 1
+    },
+    {
+      "title": " The Inception! ",
+      "director": "Critopher Nolan",
+      "year": "2012",
+      "link": "https://www.imdb.com/title/tt1375666/?ref_=nv_sr_srsg_0",
+      "imageLink": "https://source.unsplash.com/random/204x206",
+      "userId": "PzfHYaeCHiSG9CPlR5OATwVcn8g1",
+      "id": 2
+    },
+    {
+      "title": "Dark Knight",
+      "director": "Critopher Nolan",
+      "year": "2008",
+      "link": "https://en.wikipedia.org/wiki/The_Dark_Knight_(film)",
+      "imageLink": "https://source.unsplash.com/random/203x201",
+      "userId": "PzfHYaeCHiSG9CPlR5OATwVcn8g1",
+      "id": 5
+    },
+    {
+      "title": "1917",
+      "director": "Sam Mendes",
+      "year": "2019",
+      "link": "https://www.imdb.com/title/tt8579674/?ref_=fn_al_tt_1",
+      "imageLink": "https://source.unsplash.com/random/203x202",
+      "userId": "PzfHYaeCHiSG9CPlR5OATwVcn8g1",
+      "id": 6
+    },
+    {
+      "title": "Jojo Rabbit",
+      "director": "Taika Waititi",
+      "year": "2019",
+      "link": "https://www.imdb.com/title/tt2584384/?ref_=nv_sr_srsg_0",
+      "imageLink": "https://source.unsplash.com/random/203x203",
+      "userId": "PzfHYaeCHiSG9CPlR5OATwVcn8g1",
+      "id": 7
+    },
+    {
+      "title": "Ford v Ferrari",
+      "director": "James Mangold",
+      "year": "2019",
+      "link": "https://www.imdb.com/title/tt1950186/?ref_=nv_sr_srsg_0",
+      "imageLink": "https://source.unsplash.com/random/201x201",
+      "userId": "PzfHYaeCHiSG9CPlR5OATwVcn8g1",
+      "id": 8
+    },
+    {
+      "title": "Parasite!",
+      "director": "Bong Jon Hoo",
+      "year": "2019",
+      "link": "https://www.imdb.com/title/tt6751668/?ref_=nv_sr_srsg_0",
+      "imageLink": "https://source.unsplash.com/random/203x201",
+      "userId": "PzfHYaeCHiSG9CPlR5OATwVcn8g1",
+      "id": 9
+    },
+    {
+      "title": "Barry Lyndon",
+      "director": "Stanley Kubrick",
+      "year": "1981",
+      "link": "https://www.imdb.com/title/tt0072684/?ref_=nv_sr_srsg_4",
+      "imageLink": "https://source.unsplash.com/random/203x202",
+      "userId": "PzfHYaeCHiSG9CPlR5OATwVcn8g1",
+      "id": 10
+    },
+    {
+      "title": "Paths of Glory!",
+      "director": "Stanley Kubrick",
+      "year": "1957",
+      "link": "https://www.imdb.com/title/tt0050825/?ref_=nv_sr_srsg_0",
+      "imageLink": "https://source.unsplash.com/random/203x204",
+      "userId": "PzfHYaeCHiSG9CPlR5OATwVcn8g1",
+      "id": 11
+    },
+    {
+      "title": "Into the Wild",
+      "director": "Sean Pean",
+      "year": "2007",
+      "link": "https://www.imdb.com/title/tt0758758/?ref_=nv_sr_srsg_0",
+      "imageLink": "https://source.unsplash.com/random/203x205",
+      "userId": "PzfHYaeCHiSG9CPlR5OATwVcn8g1",
+      "id": "dd1c40dd-ddc9-4de8-8479-5cea621ac639"
+    }
+  ]
+}

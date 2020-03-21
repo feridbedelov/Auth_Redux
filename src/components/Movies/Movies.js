@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import "./Movies.css"
 import Movie from './Movie/Movie'
-import Axios from 'axios'
 import { fetchMovies } from '../../store/Movies/actions'
 import { connect } from 'react-redux'
 function Movies(props) {
@@ -9,19 +8,6 @@ function Movies(props) {
     useEffect(() => {
         props.loadMovies()
     }, [])
-
-    // const onclicksumit = () => {
-
-    //     const data = {
-    //         title : "Clockwork Orange",
-    //         year : 1971,
-    //         director : "Stanley Kubrick"
-    //     }
-
-    //     Axios.post("https://astroworld-9a89a.firebaseio.com/movies.json" ,data)
-    //     .then(res => console.log(res.data))
-    //     .catch(err => console.log(err))
-    // }
     
     let movies = <p>Loading...</p>
     if(!props.loading){
@@ -32,7 +18,6 @@ function Movies(props) {
         </div>)
     }
 
-    
 
     return (
         <div className="my-3 ui container">
