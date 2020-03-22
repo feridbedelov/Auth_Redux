@@ -1,10 +1,11 @@
-import { REQUEST_START, REQUEST_FAIL, MOVIES_SUCCCESS, MOVIE_SUCCCESS, MOVIE_ADD, MOVIE_DELETE, MOVIE_EDIT } from "./constants"
+import { REQUEST_START, REQUEST_FAIL, MOVIES_SUCCCESS, MOVIE_SUCCCESS, MOVIE_ADD, MOVIE_DELETE, MOVIE_EDIT, MY_MOVIES } from "./constants"
 
 const initialState = {
     movies: [],
     error: null,
     loading: false,
-    movie: {}
+    movie: {},
+    myMovies: []
 
 }
 
@@ -66,6 +67,13 @@ const movieReducer = (state = initialState, action) => {
                         }
                         return movie
                     })
+            }
+        case MY_MOVIES:
+            return{
+                ...state,
+                loading:false,
+                error:null,
+                myMovies: action.movies
             }
 
            

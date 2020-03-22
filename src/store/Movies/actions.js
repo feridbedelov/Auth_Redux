@@ -1,4 +1,4 @@
-import { MOVIES_SUCCCESS, REQUEST_START, REQUEST_FAIL, MOVIE_SUCCCESS, MOVIE_ADD,MOVIE_DELETE, MOVIE_EDIT } from "./constants"
+import { MOVIES_SUCCCESS, REQUEST_START, REQUEST_FAIL, MOVIE_SUCCCESS, MOVIE_ADD,MOVIE_DELETE, MOVIE_EDIT, MY_MOVIES } from "./constants"
 import Axios from "axios"
 
 export const getMovies = (movies) => {
@@ -49,7 +49,37 @@ export const editMovie = (movie) => {
     }
 }
 
+export const myMovies = (movies) => {
+    return {
+        type:MY_MOVIES,
+        movies
+    }
+}
 
+
+
+
+
+
+
+
+
+
+
+export const fetchMyMovies = (userId) => {
+    return dispatch => {
+        dispatch(requestStart())
+        Axios.get("http://localhost:3000/movies?userId="+userId )
+            .then(res => {
+                dispatch(myMovies(res.data))
+                console.log(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+                dispatch(requestFail(err))
+            })
+    }
+} 
 
 
 

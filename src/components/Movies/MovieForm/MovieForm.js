@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { addMovie, fetchMovie, updateMovie } from '../../../store/Movies/actions'
 import { Redirect } from "react-router-dom"
 import {v4 as uuid} from "uuid"
+import Navbar from '../../Layout/Navbar'
 
 function MovieForm(props) {
 
@@ -110,6 +111,9 @@ function MovieForm(props) {
 
 
     let form = (
+        <div>
+            <Navbar />
+        
         <div className="ui container formMovie">
 
 
@@ -196,7 +200,7 @@ function MovieForm(props) {
                         </a>
                     </div>)
             }
-
+            </div>
         </div>
     )
 

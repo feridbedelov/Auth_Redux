@@ -10,7 +10,7 @@
       "id": 1
     },
     {
-      "title": " The Inception! ",
+      "title": " The Inception",
       "director": "Critopher Nolan",
       "year": "2012",
       "link": "https://www.imdb.com/title/tt1375666/?ref_=nv_sr_srsg_0",
@@ -89,6 +89,24 @@
       "imageLink": "https://source.unsplash.com/random/203x205",
       "userId": "PzfHYaeCHiSG9CPlR5OATwVcn8g1",
       "id": "dd1c40dd-ddc9-4de8-8479-5cea621ac639"
+    },
+    {
+      "title": "Master and Commander Far Side of the World",
+      "director": "Peter Weir",
+      "year": "2003",
+      "link": "https://www.imdb.com/title/tt0311113/?ref_=fn_al_tt_1",
+      "imageLink": "https://source.unsplash.com/random/203x206",
+      "userId": "nECj0y2Mk5U85Kh39Q2xOHHCflF2",
+      "id": "a582c1b5-e3f9-44e2-a9f5-2fdfc4d59e5b"
+    },
+    {
+      "id": "a6d4da12-066b-4977-b291-f409ea45192d",
+      "title": "The Road",
+      "director": "John Hillcoat",
+      "year": "2009",
+      "link": "https://www.imdb.com/title/tt0898367/?ref_=nv_sr_srsg_0",
+      "imageLink": "https://source.unsplash.com/random/203x207",
+      "userId": "nECj0y2Mk5U85Kh39Q2xOHHCflF2"
     }
   ]
 }

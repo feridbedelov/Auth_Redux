@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import Movies from './components/Movies/Movies';
 import MovieDetail from './components/Movies/MovieDetail/MovieDetail';
 import MovieForm from './components/Movies/MovieForm/MovieForm';
+import MyMovies from './components/Movies/MyMovies/MyMovies';
 
 
 function App(props) {
@@ -37,6 +38,7 @@ function App(props) {
         <Route exact path="/movies/:id" component={MovieDetail} />
         <Route exact path="/addMovie" component={MovieForm} />
         <Route exact path="/editMovie/:id" component={MovieForm} />
+        <Route exact path="/myMovies" component={MyMovies} />
         <Redirect to="/" />
       </ Switch>
     )
@@ -46,7 +48,7 @@ function App(props) {
   return (
     
       <div className="">
-        <Navbar />
+        
         {routes}
       </div>
    

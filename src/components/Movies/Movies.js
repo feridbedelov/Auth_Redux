@@ -3,6 +3,7 @@ import "./Movies.css"
 import Movie from './Movie/Movie'
 import { fetchMovies } from '../../store/Movies/actions'
 import { connect } from 'react-redux'
+import Navbar from '../Layout/Navbar'
 function Movies(props) {
 
     useEffect(() => {
@@ -20,10 +21,13 @@ function Movies(props) {
 
 
     return (
-        <div className="my-3 ui container">
-            <h1>Movies List</h1>
-            {movies}
-        </div>
+       <div>
+           <Navbar />
+            <div className="my-3 ui container">
+                <h1>Movies List</h1>
+                {movies}
+            </div>
+       </div>
     )
 }
 

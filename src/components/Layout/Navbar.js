@@ -17,7 +17,7 @@ function Navbar(props) {
                     <Dropdown item text='Utilities'>
                         <Dropdown.Menu>
                             <div> <Link to="/addMovie" className="item">Add Movie</Link> </div>
-                            <div> <Link to="/orders" className="item">Orders</Link> </div>
+                            <div> <Link to="/myMovies" className="item">My Movies</Link> </div>
                             
                         </Dropdown.Menu>
                     </Dropdown>)

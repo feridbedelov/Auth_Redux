@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom'
 import "./MovieDetail.css"
 import { connect } from 'react-redux';
 import { fetchMovie, removeMovie } from '../../../store/Movies/actions';
+import Navbar from '../../Layout/Navbar';
 
 function MovieDetail(props) {
 
@@ -31,7 +32,7 @@ function MovieDetail(props) {
 
     let links = null;
 
-    if (props.isAuth) {
+    if (props.isAuth && props.userId === props.movie.userId  ) {
         links = (
             <div>
                 <Link to={"/editMovie/" + props.movie.id } className="ui green inverted button">
@@ -46,13 +47,16 @@ function MovieDetail(props) {
 
     let details = <p>Loading... </p>
     if(props.movie){
-        details =( <div className="ui container details">
+        details =(
+            <div>
+                <Navbar />
+            <div className="ui container details">
 
             <div className="details-movie">
                 <h1 >Title : {props.movie.title} </h1>
-                <p className="ui header">Director : {props.movie.director} </p>
-                <p className="ui header">Release Year : {props.movie.year}</p>
-                <p className="ui header">For more :
+                <p >Director : {props.movie.director} </p>
+                <p >Release Year : {props.movie.year}</p>
+                <p >For more :
                     <a href={props.movie.link} target="_blank" >Click Here</a>
                 </p>
 
@@ -62,18 +66,19 @@ function MovieDetail(props) {
             <a rel="noopener noreferrer" target="_blank" className="ui medium circular image" href="">
                 <img src={props.movie.imageLink} alt="feradda" />
             </a>
-
+            </div>
         </div>)
     }
 
-    return redirectOnDelete ?  <Redirect to = "/movies" /> : details
+    return redirectOnDelete ?  <Redirect to = "/movies" /> :  details
 }
 
 
 const mapStateTProps = (state) => {
     return {
         isAuth: state.auth.token !== null,
-        movie: state.movie.movie
+        movie: state.movie.movie,
+        userId : state.auth.userId
     }
 }
 

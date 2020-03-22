@@ -4,6 +4,7 @@ import {auth} from "../../store/Auth/actions"
 import astro from "../../assets/img/astro.png"
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import Navbar from '../Layout/Navbar'
 
 const Authenticate = (props) => {
 
@@ -97,16 +98,21 @@ const Authenticate = (props) => {
 
 
     return (
-        <div className="auth">
-            {authRedirect}
-            <img className="hero" src={astro} />
-            <div className="form-center">
-                <h3>{signUp ? "Sign Up" : "Sign In"}</h3>
-                {errorMessages}
-                {form}
-                <button className="ui button btnOwn" onClick={onChangeAuth}>{signUp ? "Change To SignIn" : "Change To SignUp"}</button>
+        <div>
+            <Navbar />
+            <div className="auth">
+
+                {authRedirect}
+                <img className="hero-auth" src={astro} />
+                <div className="form-center">
+                    <h3>{signUp ? "Sign Up" : "Sign In"}</h3>
+                    {errorMessages}
+                    {form}
+                    <button className="ui button btnOwn" onClick={onChangeAuth}>{signUp ? "Change To SignIn" : "Change To SignUp"}</button>
+                </div>
             </div>
         </div>
+        
     )
 }
 

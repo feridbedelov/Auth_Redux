@@ -1,0 +1,5 @@
+modal for delete movie,
+movie detail page design,
+search movies ,
+wishlist,
+movies page design,
