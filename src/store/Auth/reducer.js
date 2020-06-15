@@ -1,8 +1,8 @@
 import { AUTH_START, AUTH_SUCCESS, AUTH_FAIL, AUTH_LOGOUT } from "./constants"
 
 const initialState = {
-    token : null,
-    userId : null,
+    token : localStorage.getItem("token"),
+    userId : localStorage.getItem("userId"),
     error : null,
     loading:false
 }

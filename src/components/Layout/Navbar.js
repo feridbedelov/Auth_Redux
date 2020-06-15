@@ -2,13 +2,18 @@ import React from 'react'
 import { Link, NavLink } from "react-router-dom"
 import { connect } from 'react-redux'
 import { Dropdown } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next';
 
 
 function Navbar(props) {
+
+    const { t } = useTranslation();
+
+
     return (
         < div className="ui large menu" >
             <NavLink exact to="/" className="item">Home</NavLink>
-            <NavLink to="/movies" className="item">Movies</NavLink>
+            <NavLink to="/movies" className="item">{t("navbar.movies")}</NavLink>
 
             <div className="right menu">
                
