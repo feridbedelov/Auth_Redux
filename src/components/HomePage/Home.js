@@ -1,30 +1,31 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Home.css";
 import { Link } from "react-router-dom";
-import Carousel from "@brainhubeu/react-carousel";
-import "@brainhubeu/react-carousel/lib/style.css";
+// import Carousel from "@brainhubeu/react-carousel";
+// import "@brainhubeu/react-carousel/lib/style.css";
 import { connect } from "react-redux";
-import { fetchMovies } from "../../store/Movies/actions";
 import { changeLang } from "../../store/Language/langActions";
+import { motion } from "framer-motion"
 
-import MovieCarousel from "../Movies/MovieCarousel/MovieCarousel";
+
+// import MovieCarousel from "../Movies/MovieCarousel/MovieCarousel";
 import { useTranslation } from "react-i18next";
 
+
+
 function Home(props) {
-  useEffect(() => {
-    props.loadMovies();
-  }, []);
+
 
   const { t } = useTranslation();
 
-  
 
-  let movies = null;
-  if (props.movies) {
-    movies = props.movies.map((movie) => {
-      return <MovieCarousel key={movie.id} movie={movie} />;
-    });
+
+  const onLangChange = (e) => {
+    e.preventDefault()
+    props.changeLanguage(e.target.value)
   }
+
+  
 
   return (
     <div className='hero'>
@@ -33,17 +34,11 @@ function Home(props) {
         <div className='logo'>aurora.</div>
         <ul className='nav-list'>
           <li className='nav-item'>
-            <div className = "custom-select">
-              <button onClick={() => props.changeLanguage("az")} type='button'>
-                AZ
-              </button>
-              <button onClick={() => props.changeLanguage("en")} type='button'>
-                EN
-              </button>
-              <button onClick={() => props.changeLanguage("es")} type='button'>
-                ES
-              </button>
-            </div>
+            <select className="custom-select" value={props.lang} onChange={onLangChange}>
+              <option value={"az"}>AZ</option>
+              <option value={"en"}>EN</option>
+              <option value={"es"}>ES</option>
+            </select>
           </li>
 
           <li className='nav-item'>
@@ -57,10 +52,10 @@ function Home(props) {
                 Log Out
               </Link>
             ) : (
-              <Link to='/auth' className='nav-link auth-1 '>
-                Sign Up
-              </Link>
-            )}
+                <Link to='/auth' className='nav-link auth-1 '>
+                  Sign Up
+                </Link>
+              )}
           </li>
         </ul>
       </header>
@@ -79,7 +74,12 @@ function Home(props) {
       </div>
 
       <div className='showcase-text'>
-        <h1>{t("slogan")}</h1>
+        <motion.h1
+          initial={{ y: "-100vh", opacity: 0 }}
+          animate={{ y: "0", opacity: 1 }}
+          transition={{ type: "spring", delay: 0.5 }}
+
+        >{t("slogan")}</motion.h1>
         <p>Check out best movies that We have selected for you</p>
         <Link to='/movies' className='ui large button'>
           {" "}
@@ -87,7 +87,7 @@ function Home(props) {
         </Link>
       </div>
 
-      <div className='movies-carousel'>
+      {/* <div className='movies-carousel'>
         <Carousel
           autoPlay={2000}
           animationSpeed={1000}
@@ -96,22 +96,21 @@ function Home(props) {
         >
           {movies}
         </Carousel>
-      </div>
+      </div> */}
     </div>
   );
 }
 
 const mapStateToProps = (state) => {
   return {
-    movies: state.movie.movies,
     isAuth: state.auth.token !== null,
+    lang: state.lang.lang
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadMovies: () => dispatch(fetchMovies()),
-    changeLanguage : (code) => dispatch(changeLang(code)),
+    changeLanguage: (code) => dispatch(changeLang(code)),
   };
 };
 

@@ -1,229 +1,99 @@
-import React, { useState, useEffect } from 'react'
-import "./MovieForm.css"
+import React from 'react'
+import Axios from 'axios'
 import { connect } from 'react-redux'
-import { addMovie, fetchMovie, updateMovie } from '../../../store/Movies/actions'
-import { Redirect } from "react-router-dom"
-import {v4 as uuid} from "uuid"
+import { useHistory } from "react-router-dom"
+import { useMutation, queryCache } from 'react-query'
+import { Formik, Form } from "formik"
 import Navbar from '../../Layout/Navbar'
+import FormControl from '../../CustomInputs/FormControl'
+import { validationSchema } from '../../../validation/formValidation'
+import "./MovieForm.css"
+import { v4 as uuid } from "uuid"
 
-function MovieForm(props) {
+const initialValues = {
+    id:uuid(),
+    title: "",
+    director: "",
+    year: "",
+    link: "",
+    imageLink: ""
+}
 
-    useEffect(() => {
-        if (props.match.params.id) {
-            props.loadingMovie(props.match.params.id);
-        }
-    }, [])
+function MovieForm({ userId }) {
 
+    const history = useHistory()
 
-
-
-    const [state, setState] = useState({
-        id: (props.match.params.id && props.movie) ? props.movie.id : null,
-        title: (props.match.params.id && props.movie) ? props.movie.title : "",
-        director: (props.match.params.id && props.movie) ? props.movie.director : "",
-        year: (props.match.params.id && props.movie) ? props.movie.year : "",
-        link: (props.match.params.id && props.movie) ? props.movie.link : "",
-        imageLink: (props.match.params.id && props.movie) ? props.movie.imageLink : ""
-    })
-
-    const [errors, setErrors] = useState({})
-
-    const validate = () => {
-        let fieldErrors = {}
-        let isValid = true;
-
-        if (state.title === "") {
-            fieldErrors.titleError = "Name field can not be empty";
-            isValid = false;
-        }
-        if (state.director.length <= 3) {
-            fieldErrors.directorError = "Director field must be at least 3 letters long";
-            isValid = false;
-        }
-        if (!(/^(1[9][0-9]\d|20[0-1]\d|2020)$/.test(state.year)) || state.year === "") {
-            fieldErrors.yearError = "Enter a valid year";
-            isValid = false;
-        }
-        if (state.link === "") {
-            fieldErrors.linkError = "Enter a valid url of book";
-            isValid = false;
-        }
-        if (state.imageLink === "") {
-            fieldErrors.imageLinkError = "Enter a valid url of photo of book";
-            isValid = false;
-        }
-
-        if (!isValid) {
-            setErrors(
-                fieldErrors
-            )
-        }
-
-        return isValid;
-
-    }
-
-
-    const [redirectOnDone, setRedirectOnDone] = useState(false)
-
-    const submitHandler = (e) => {
-        e.preventDefault();
-        let isValid = validate();
-
-        if (isValid) {
-            
-
-            if (props.match.params.id) {
-                const updatedMovie = {
-                    title: state.title,
-                    director: state.director,
-                    year: state.year,
-                    link: state.link,
-                    imageLink: state.imageLink,
-                    userId: props.userID
-                }
-                console.log("updated")
-                props.updatingMovie(props.match.params.id, updatedMovie)
-            } else {
-                console.log("added")
-                const newMovie = {
-                    id: uuid(),
-                    title: state.title,
-                    director: state.director,
-                    year: state.year,
-                    link: state.link,
-                    imageLink: state.imageLink,
-                    userId: props.userID
-                }
-                props.addingMovie(newMovie)
-
+    const [mutate] = useMutation(async (values) => {
+        console.log(values)
+        const newMovie = { ...values, userId }
+        const config = {
+            headers: {
+                "Content-Type": "application/json"
             }
-
-            setRedirectOnDone(true)
-
-
-        } else {
-
-            console.log("not okay")
         }
-    }
 
-
+        await Axios.post("http://localhost:3000/movies", newMovie, config)
+        
+        history.push("/movies")
+    }, {
+        onMutate: (newM) => {
+            let movies = [] 
+            const prevMovies = queryCache.getQueryData("movies")
+            if(prevMovies) movies = [...prevMovies]
+            queryCache.setQueryData("movies",[...movies,newM])
+            return prevMovies
+        },
+        onError: (error, newMovie,prevMovies) => {
+            queryCache.setQueryData('movies', prevMovies)
+        },
+    })
 
     let form = (
         <div>
             <Navbar />
-        
-        <div className="ui container formMovie">
+            <div className="ui container formMovie">
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={mutate}
+                >
+                    {(formik) => (
+                        <>
+                            <Form className="ui form form-movie">
+                                <h1 className="heading">Add Post</h1>
 
+                                <FormControl control="input" name="title" label="Title" />
+                                <FormControl control="input" name="director" label="Director" />
+                                <FormControl control="input" name="year" label="Year" />
+                                <FormControl control="input" name="link" label="Movie Link" />
+                                <FormControl control="input" name="imageLink" label="Image Link " />
 
-            <form onSubmit={submitHandler} className="ui form form-movie">
-                <h1 className="heading">Add Post</h1>
-                <div className="field ten wide">
-                    <label>Title</label>
-                    <input
-                        value={state.title}
-                        type="text" placeholder="Enter a valid title"
-                        name="title"
-                        onChange={e => {
-                            setState({ ...state, title: e.target.value })
-                            errors.titleError && setErrors({ ...errors, titleError: null })
-                        }}
-                    />
-                    {errors.titleError && <span>{errors.titleError}</span>}
+                                <button type="submit" className="ui submit button">Submit</button>
+                            </Form>
+                            {
+                                formik.values.imageLink && (
 
-                </div>
-                <div className="field ten wide">
-                    <label>Director</label>
-                    <input
-                        type="text" placeholder="Enter an director name"
-                        value={state.director}
-                        name="director"
-                        onChange={e => {
-                            setState({ ...state, director: e.target.value })
-                            errors.directorError && setErrors({ ...errors, directorError: null })
-                        }}
-                    />
-                    {errors.directorError && <span>{errors.directorError}</span>}
-                </div>
-
-                <div className="field ten wide">
-                    <label> Release Year</label>
-                    <input
-                        type="text" placeholder="Enter a valid year"
-                        value={state.year}
-                        name="year"
-                        onChange={e => {
-                            setState({ ...state, year: e.target.value })
-                            errors.yearError && setErrors({ ...errors, yearError: null })
-                        }}
-                    />
-                    {errors.yearError && <span>{errors.yearError}</span>}
-                </div>
-                <div className="field ten wide">
-                    <label>Link</label>
-                    <input
-                        type="text" placeholder="Enter a link"
-                        value={state.link}
-                        onChange={e => {
-                            setState({ ...state, link: e.target.value })
-                            errors.linkError && setErrors({ ...errors, linkError: null })
-                        }}
-                        name="link"
-                    />
-                    {errors.linkError && <span>{errors.linkError}</span>}
-                </div>
-                <div className="field ten wide">
-                    <label>ImageLink</label>
-                    <input
-                        type="text" placeholder="Enter a image Link"
-                        name="imageLink" value={state.imageLink}
-                        onChange={e => {
-                            setState({ ...state, imageLink: e.target.value })
-                            errors.imageLinkError && setErrors({ ...errors, imageLinkError: null })
-                        }}
-                    />
-                    {errors.imageLinkError && <span>{errors.imageLinkError}</span>}
-
-                </div>
-                <button type="submit" className="ui submit button">Submit</button>
-            </form>
-
-
-
-            {
-                state.imageLink && (
-
-                    <div>
-                        <a rel="noopener noreferrer" target="_blank" className="ui large circular image" href={state.link}>
-                            <img src={state.imageLink} alt="feradda" />
-                        </a>
-                    </div>)
-            }
+                                    <div>
+                                        <a rel="noopener noreferrer" target="_blank" className="ui large circular image" href={formik.values.imageLink} >
+                                            <img src={formik.values.imageLink} alt={formik.values.title} />
+                                        </a>
+                                    </div>)
+                            }
+                        </>
+                    )
+                    }
+                </Formik>
             </div>
         </div>
     )
 
-    return redirectOnDone ? <Redirect to="/movies" /> : form
+    return form
 }
-
-
 
 const mapStateToProps = state => {
     return {
-        userID: state.auth.userId,
-        movie: state.movie.movie
+        userId: state.auth.userId
     }
 }
 
-
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addingMovie: (movie) => dispatch(addMovie(movie)),
-        loadingMovie: (id) => dispatch(fetchMovie(id)),
-        updatingMovie : (id,movie) => dispatch(updateMovie(id,movie))
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MovieForm)
+export default connect(mapStateToProps)(MovieForm)

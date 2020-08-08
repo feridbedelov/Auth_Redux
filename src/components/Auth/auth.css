@@ -7,7 +7,6 @@
 }
 
 .form-center{
-    
     padding: 40px;
     width: 40%;
     border-radius: 15px;
@@ -18,8 +17,6 @@
 
 
 .form-center label{
-
-    
     color: #ffffff !important;
 }
 
@@ -32,4 +29,11 @@
 .form-center .btnOwn{
     margin-top: 20px;
 
+}
+
+.spinner-center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

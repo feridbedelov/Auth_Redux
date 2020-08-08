@@ -1,48 +1,48 @@
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { fetchMyMovies } from '../../../store/Movies/actions'
+import React from 'react'
 import { connect } from 'react-redux'
 import MyMovie from './MyMovie/MyMovie'
 import Navbar from '../../Layout/Navbar'
+import { fetchMyMovies } from '../../../utils/queryFuncs/movies'
+import { useQuery } from 'react-query'
 
-function MyMovies(props) {
+function MyMovies({ userId }) {
 
-    useEffect(()=>{
-        props.onFetchMyMovies(props.userId)
-    },[])
+    const { data: moviesData, status, isFetching } = useQuery(['mymovies', userId], fetchMyMovies)
 
-    let movies = <p>Loading...</p>
-    if(props.movies) {
-        movies = (props.movies.map(movie=> {
-           return <MyMovie key = {movie.id} movie={movie} />
-        }))
+    let movies;
+
+    if (status === "loading") movies = <p>Loading...</p>
+    if (status === "error") movies = <p>Something went wrong</p>
+
+    if (status === "success") {
+        if (moviesData.length > 0) {
+            movies = (moviesData.map(movie => {
+                return <MyMovie key={movie.id} movie={movie} />
+            }))
+        } else {
+            movies = <p>You have no movies added</p>
+        }
     }
 
     return (
         <div>
-        <Navbar />
-        <div className="ui container">
-            <div className="ui divided items">
-                {movies}
+            <Navbar />
+            <div className="ui container">
+                <div className="ui divided items">
+                    <h2>My Movies {isFetching && "Background fetching"} </h2>
+                    {movies}
+                </div>
             </div>
         </div>
-       </div>
     )
 }
 
 
-const mapStateToProps = (state)=> {
+const mapStateToProps = (state) => {
     return {
-        userId : state.auth.userId,
-        movies: state.movie.myMovies,
-        loading:state.movie.loading
+        userId: state.auth.userId,
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onFetchMyMovies : (userId) => dispatch(fetchMyMovies(userId))
-    }
-}
 
-export default connect(mapStateToProps,mapDispatchToProps)(MyMovies)
+export default connect(mapStateToProps)(MyMovies)

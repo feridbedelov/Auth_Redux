@@ -11,18 +11,19 @@ import Movies from "./components/Movies/Movies";
 import MovieDetail from "./components/Movies/MovieDetail/MovieDetail";
 import MovieForm from "./components/Movies/MovieForm/MovieForm";
 import MyMovies from "./components/Movies/MyMovies/MyMovies";
+import MovieEdit from  "./components/Movies/MovieEdit/MovieEdit";
 import { useTranslation } from "react-i18next";
 
-function App(props) {
+function App({onTrySignUp,lang,isAuth}) {
   useEffect(() => {
-    props.onTrySignUp();
-  }, []);
+    onTrySignUp();
+  }, [onTrySignUp]);
 
   const { i18n } = useTranslation();
 
   useEffect(() => {
-    i18n.changeLanguage(props.lang);
-  }, [props.lang]);
+    i18n.changeLanguage(lang);
+  }, [lang]);
 
   let routes = (
     <Switch>
@@ -34,7 +35,7 @@ function App(props) {
     </Switch>
   );
 
-  if (props.isAuth) {
+  if (isAuth) {
     routes = (
       <Switch>
         <Route exact path='/' component={Home} />
@@ -43,7 +44,7 @@ function App(props) {
         <Route exact path='/movies' component={Movies} />
         <Route exact path='/movies/:id' component={MovieDetail} />
         <Route exact path='/addMovie' component={MovieForm} />
-        <Route exact path='/editMovie/:id' component={MovieForm} />
+        <Route exact path='/editMovie/:id' component={MovieEdit} />
         <Route exact path='/myMovies' component={MyMovies} />
         <Redirect to='/' />
       </Switch>

@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+
 function MyMovie({ movie }) {
     return (
         <div className="item">
-            <div className="image"><img src={movie.imageLink} /></div>
+            <div className="image"><img src={movie.imageLink} alt = {movie.title} /></div>
             <div className="middle aligned content">
                 <Link to={"/movies/" + movie.id} className="header">{movie.title}</Link>
                 <div className="meta"><span className="cinema">{movie.year}</span></div>

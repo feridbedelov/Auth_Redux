@@ -4,11 +4,11 @@ import { logout } from '../../store/Auth/actions';
 import { connect } from 'react-redux';
 
 
-function Logout(props) {
+function Logout({onLogout}) {
 
     useEffect(() => {
-        props.onLogout();
-    }, [])
+        onLogout();
+    }, [onLogout])
 
     return (
         <div>
