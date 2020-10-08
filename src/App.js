@@ -11,10 +11,10 @@ import Movies from "./components/Movies/Movies";
 import MovieDetail from "./components/Movies/MovieDetail/MovieDetail";
 import MovieForm from "./components/Movies/MovieForm/MovieForm";
 import MyMovies from "./components/Movies/MyMovies/MyMovies";
-import MovieEdit from  "./components/Movies/MovieEdit/MovieEdit";
+import MovieEdit from "./components/Movies/MovieEdit/MovieEdit";
 import { useTranslation } from "react-i18next";
 
-function App({onTrySignUp,lang,isAuth}) {
+function App({ onTrySignUp, lang, isAuth }) {
   useEffect(() => {
     onTrySignUp();
   }, [onTrySignUp]);
@@ -25,6 +25,7 @@ function App({onTrySignUp,lang,isAuth}) {
     i18n.changeLanguage(lang);
   }, [lang]);
 
+  console.log("test")
   let routes = (
     <Switch>
       <Route exact path='/' component={Home} />
